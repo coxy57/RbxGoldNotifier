@@ -15,6 +15,7 @@ z = "MADE BY coxy57 ON DISCORD"
 
 # put discord webhook url here
 WEBHOOK = ""
+PRINT_WHEN_PINGED = False
 
 
 
@@ -30,6 +31,8 @@ class rblxGoldHandler(websocket.WebSocketApp):
         message = str(message).strip()
         if "2" == message:
             ws.send("3")
+            if PRINT_WHEN_PINGED:
+                print('pinged server! connection still alive')
         if 'rain-stream' in message:
             pattern = r'\[({.*})\]'
             msg = json.loads(re.search(pattern,message).group(1)[:-2])
