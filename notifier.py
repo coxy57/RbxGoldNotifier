@@ -27,6 +27,9 @@ class rblxGoldHandler(websocket.WebSocketApp):
         self.rain_started = False
     def on_message(self,ws,message):
         if not all(v in globals() for v in ("x","y","z")): return
+        message = str(message).strip()
+        if "2" == message:
+            ws.send("3")
         if 'rain-stream' in message:
             pattern = r'\[({.*})\]'
             msg = json.loads(re.search(pattern,message).group(1)[:-2])
